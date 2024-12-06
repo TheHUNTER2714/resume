@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Resume Builder</title>
+  <style>
+    /* General Reset */
+    body, h1, h2, h3, p, ul, li, form, input, textarea, button {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Body Styling */
+    body {
+      background: url('https://media0.giphy.com/media/wZiAeWlhfLUH8Bdpkr/giphy.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    /* Container Styling */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Styling */
+    .form-container h2 {
+      text-align: center;
+      color: #4a90e2;
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+      margin-top: 15px;
+      display: block;
+      font-size: 1.1em;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 20px;
+      border-radius: 8px; /* More rounded corners */
+      border: 1px solid #ccc;
+      font-size: 1em;
+      background-color: #f9f9f9;
+      box-sizing: border-box; /* Ensures padding is included in the width */
+    }
+
+    input:focus, textarea:focus {
+      border-color: #4a90e2;
+      outline: none;
+      box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 8px; /* Rounded corners for the button */
+      cursor: pointer;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #357ab8;
+    }
+
+    /* Section Styling */
+    .section-title {
+      font-size: 1.3em;
+      margin-top: 30px;
+      color: #4a90e2;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    /* Section Backgrounds */
+    .section:nth-child(even) {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .form-container h2 {
+        font-size: 1.8em;
+      }
+
+      button {
+        padding: 12px;
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="form-container">
+      <h2>Create Your Resume</h2>
+      <form id="resumeForm" onsubmit="storeData(event)">
+        
+        <!-- Contact Information -->
+        <div class="section">
+          <h3 class="section-title">Contact Information</h3>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="Enter your location" required>
+        </div>
+
+        <!-- About Section -->
+        <div class="section">
+          <h3 class="section-title">About You</h3>
+          <label for="about">About Me</label>
+          <textarea id="about" rows="4" placeholder="Write a brief about yourself" required></textarea>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section">
+          <h3 class="section-title">Skills</h3>
+          <label for="skills">Skills (Comma Separated)</label>
+          <input type="text" id="skills" placeholder="E.g., HTML, CSS, JavaScript" required>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="section">
+          <h3 class="section-title">Experience</h3>
+          <label for="experience">Describe your experience</label>
+          <textarea id="experience" rows="4" placeholder="Describe your professional experience" required></textarea>
+        </div>
+
+        <!-- Education Section -->
+        <div class="section">
+          <h3 class="section-title">Education</h3>
+          <label for="education">Educational Background</label>
+          <textarea id="education" rows="4" placeholder="Your degrees and institutions" required></textarea>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="section">
+          <h3 class="section-title">Projects</h3>
+          <label for="projects">Describe your projects</label>
+          <textarea id="projects" rows="4" placeholder="Include notable personal or professional projects" required></textarea>
+        </div>
+
+        <!-- Social Media Section -->
+        <div class="section">
+          <h3 class="section-title">Social Media Links</h3>
+          <label for="linkedin">LinkedIn</label>
+          <input type="url" id="linkedin" placeholder="Enter LinkedIn profile URL">
+
+          <label for="twitter">Twitter</label>
+          <input type="url" id="twitter" placeholder="Enter Twitter profile URL">
+
+          <label for="github">GitHub</label>
+          <input type="url" id="github" placeholder="Enter GitHub profile URL">
+        </div>
+
+        <!-- Profile Image Section -->
+        <div class="section">
+          <h3 class="section-title">Profile Image</h3>
+          <label for="image">Upload your profile image</label>
+          <input type="file" id="image" accept="image/*">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Generate Resume</button>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function storeData(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const location = document.getElementById('location').value;
+      const about = document.getElementById('about').value;
+      const skills = document.getElementById('skills').value.split(',');
+      const experience = document.getElementById('experience').value;
+      const education = document.getElementById('education').value;
+      const projects = document.getElementById('projects').value;
+      const linkedin = document.getElementById('linkedin').value;
+      const twitter = document.getElementById('twitter').value;
+      const github = document.getElementById('github').value;
+
+      const fileInput = document.getElementById('image');
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        localStorage.setItem('resumeData', JSON.stringify({
+          name, email, phone, location, about, skills, experience, education, projects, linkedin, twitter, github, image: e.target.result
+        }));
+        window.location.href = 'display.html'; // Redirect to display page
+      };
+
+      if (fileInput.files.length > 0) {
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+  </script>
+
+</body>
+</html>

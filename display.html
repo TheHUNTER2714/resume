@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume</title>
+  <style>
+    /* General Reset */
+    body, h1, h2, h3, p, ul, li {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+    }
+
+    body {
+      background: url('https://www.bing.com/th/id/OGC.677c5559cc709cabbdb69dc9482f0c6e?pid=1.7&rurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f88%2f6b%2f15%2f886b1598b09c5c588004570c4fd1e28c.gif&ehk=CJAowFvd%2bNvR4IAWd76w3lnta4%2bqYS79JOc%2fLenaryk%3d') no-repeat center center fixed;
+      background-size: cover;
+      color: #331515;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9); /* Slight transparency to show background */
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Resume Section */
+    .resume {
+      display: flex;
+      margin-top: 20px;
+      gap: 20px;
+    }
+
+    /* Left Panel Styling */
+    .left-panel {
+      width: 30%;
+      background-color: #8d8df5;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(219, 212, 212, 0.05);
+      text-align: center;
+    }
+
+    .profile-img img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #090909;
+    }
+
+    h3 {
+      color: #0febeb;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .social-media a {
+      color: #f40d0d;
+      margin-right: 15px;
+      font-size: 1.2em;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-media a:hover {
+      color: #357ab8;
+    }
+
+    .social-media a:last-child {
+      margin-right: 0;
+    }
+
+    /* Right Panel Styling */
+    .right-panel {
+      width: 70%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-panel h3 {
+      color: #4a90e2;
+      font-size: 1.5em;
+      margin-bottom: 15px;
+    }
+
+    .right-panel p {
+      color: #555;
+      font-size: 1.1em;
+      line-height: 1.7;
+    }
+
+    .right-panel ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .right-panel ul li {
+      font-size: 1.1em;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    /* Button Styling */
+    .btn {
+      background-color: #4a90e2;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 1.2em;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s ease;
+      display: block;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: #357ab8;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .resume {
+        flex-direction: column;
+      }
+
+      .left-panel,
+      .right-panel {
+        width: 100%;
+      }
+
+      .left-panel {
+        margin-bottom: 20px;
+      }
+
+      .right-panel h3 {
+        font-size: 1.4em;
+      }
+    }
+
+    /* Print Media Queries */
+    @media print {
+      .btn {
+        display: none; /* Hide the print button when printing */
+      }
+
+      /* Adjust the layout for print */
+      .resume {
+        flex-direction: row;
+        gap: 0;
+      }
+
+      /* Left Panel */
+      .left-panel {
+        width: 30%;
+      }
+
+      /* Right Panel */
+      .right-panel {
+        width: 70%;
+      }
+
+      /* Add background color to the left panel when printing */
+      .left-panel {
+        background-color: #6614ca !important; /* Dark purple for printing */
+      }
+
+      /* Modify text and other styles when printing */
+      .right-panel h3 {
+        font-size: 2.5em;
+      }
+
+      /* Hide the background image in print for a cleaner look */
+      body {
+        background-color: #8d8df5;
+      }
+
+      /* Make the page landscape-oriented */
+      @page {
+        size: A4 landscape;
+        margin: 1mm;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      .container {
+        page-break-after: avoid;
+        page-break-before: avoid;
+      }
+
+      /* Adjust font sizes for printing */
+      .right-panel p,
+      .right-panel h3 {
+        font-size: 14px;
+      }
+
+      .left-panel h3 {
+        font-size: 12px;
+      }
+
+      /* Hide social media icons in print */
+      .social-media {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Resume Section -->
+    <div class="resume" id="resume-display">
+      <!-- Left Panel (Profile and Contact) -->
+      <div class="left-panel">
+        <div class="profile-img">
+          <img id="resume-img" src="https://via.placeholder.com/120" alt="Profile Picture">
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li id="resume-email">Email: johndoe@example.com</li>
+            <li id="resume-phone">Phone: +123 456 7890</li>
+            <li id="resume-location">Location: New York, USA</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Skills</h3>
+          <ul id="resume-skills">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+            <li>Node.js</li>
+          </ul>
+        </div>
+        <div class="social-media" id="social-media">
+          <!-- Social Media Links -->
+        </div>
+      </div>
+
+      <!-- Right Panel (Resume Details) -->
+      <div class="right-panel">
+        <h3 id="resume-name">John Doe</h3>
+        <p id="resume-about">A passionate web developer with experience in building modern web applications using the latest technologies like React and Node.js.</p>
+
+        <h3>Experience</h3>
+        <p id="resume-experience">Worked at XYZ Corp as a Front-end Developer. Developed and maintained web applications using React, JavaScript, and CSS.</p>
+
+        <h3>Education</h3>
+        <p id="resume-education">Bachelor's in Computer Science from ABC University (2018).</p>
+
+        <h3>Projects</h3>
+        <p id="resume-projects">Built a task management app using React. Designed and developed a responsive e-commerce site using Node.js and Express.</p>
+      </div>
+    </div>
+
+    <!-- Print Button -->
+    <button class="btn" onclick="window.print()">Print Resume</button>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const resumeData = JSON.parse(localStorage.getItem('resumeData'));
+
+      if (resumeData) {
+        // Populate resume data
+        document.getElementById('resume-name').textContent = resumeData.name;
+        document.getElementById('resume-email').textContent = resumeData.email;
+        document.getElementById('resume-phone').textContent = resumeData.phone;
+        document.getElementById('resume-location').textContent = resumeData.location;
+        document.getElementById('resume-about').textContent = resumeData.about;
+
+        // Populate skills
+        const skillsList = document.getElementById('resume-skills');
+        resumeData.skills.forEach(skill => {
+          const li = document.createElement('li');
+          li.textContent = skill.trim();
+          skillsList.appendChild(li);
+        });
+
+        // Experience, education, and projects
+        document.getElementById('resume-experience').textContent = resumeData.experience;
+        document.getElementById('resume-education').textContent = resumeData.education;
+        document.getElementById('resume-projects').textContent = resumeData.projects;
+
+        // Profile image
+        document.getElementById('resume-img').src = resumeData.image;
+
+        // Social media links
+        let socialHTML = '';
+        if (resumeData.linkedin) socialHTML += `<a href="${resumeData.linkedin}" target="_blank">LinkedIn</a>`;
+        if (resumeData.twitter) socialHTML += `<a href="${resumeData.twitter}" target="_blank">Twitter</a>`;
+        if (resumeData.github) socialHTML += `<a href="${resumeData.github}" target="_blank">GitHub</a>`;
+        document.getElementById('social-media').innerHTML = socialHTML;
+      }
+    }
+  </script>
+
+</body>
+
+</html>
+
