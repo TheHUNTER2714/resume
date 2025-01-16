@@ -284,43 +284,41 @@
 
   <script>
     window.onload = function () {
-      const resumeData = JSON.parse(localStorage.getItem('resumeData'));
-
-      if (resumeData) {
-        // Populate resume data
-        document.getElementById('resume-name').textContent = resumeData.name;
-        document.getElementById('resume-email').textContent = resumeData.email;
-        document.getElementById('resume-phone').textContent = resumeData.phone;
-        document.getElementById('resume-location').textContent = resumeData.location;
-        document.getElementById('resume-about').textContent = resumeData.about;
-
-        // Populate skills
-        const skillsList = document.getElementById('resume-skills');
-        resumeData.skills.forEach(skill => {
-          const li = document.createElement('li');
-          li.textContent = skill.trim();
-          skillsList.appendChild(li);
-        });
-
-        // Experience, education, and projects
-        document.getElementById('resume-experience').textContent = resumeData.experience;
-        document.getElementById('resume-education').textContent = resumeData.education;
-        document.getElementById('resume-projects').textContent = resumeData.projects;
-
-        // Profile image
-        document.getElementById('resume-img').src = resumeData.image;
-
-        // Social media links
-        let socialHTML = '';
-        if (resumeData.linkedin) socialHTML += `<a href="${resumeData.linkedin}" target="_blank">LinkedIn</a>`;
-        if (resumeData.twitter) socialHTML += `<a href="${resumeData.twitter}" target="_blank">Twitter</a>`;
-        if (resumeData.github) socialHTML += `<a href="${resumeData.github}" target="_blank">GitHub</a>`;
-        document.getElementById('social-media').innerHTML = socialHTML;
-      }
-    }
+      const resumeData = JSON.parse(localStorage.getItem('resumeData')) || {};
+  
+      // Populate resume data with fallback values
+      document.getElementById('resume-name').textContent = resumeData.name || 'John Doe';
+      document.getElementById('resume-email').textContent = resumeData.email || 'Email: Not Provided';
+      document.getElementById('resume-phone').textContent = resumeData.phone || 'Phone: Not Provided';
+      document.getElementById('resume-location').textContent = resumeData.location || 'Location: Not Provided';
+      document.getElementById('resume-about').textContent = resumeData.about || 'No About section provided.';
+  
+      // Populate skills
+      const skillsList = document.getElementById('resume-skills');
+      skillsList.innerHTML = '';
+      (resumeData.skills || []).forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill.trim();
+        skillsList.appendChild(li);
+      });
+  
+      // Experience, education, and projects
+      document.getElementById('resume-experience').textContent = resumeData.experience || 'No experience provided.';
+      document.getElementById('resume-education').textContent = resumeData.education || 'No education details provided.';
+      document.getElementById('resume-projects').textContent = resumeData.projects || 'No projects listed.';
+  
+      // Profile image
+      document.getElementById('resume-img').src = resumeData.image || 'https://via.placeholder.com/120';
+      document.getElementById('resume-img').alt = resumeData.name || 'Profile Picture';
+  
+      // Social media links
+      const socialMediaDiv = document.getElementById('social-media');
+      socialMediaDiv.innerHTML = '';
+      if (resumeData.linkedin) socialMediaDiv.innerHTML += `<a href="${resumeData.linkedin}" target="_blank" alt="LinkedIn">LinkedIn</a>`;
+      if (resumeData.twitter) socialMediaDiv.innerHTML += `<a href="${resumeData.twitter}" target="_blank" alt="Twitter">Twitter</a>`;
+      if (resumeData.github) socialMediaDiv.innerHTML += `<a href="${resumeData.github}" target="_blank" alt="GitHub">GitHub</a>`;
+    };
   </script>
-
 </body>
 
 </html>
-
