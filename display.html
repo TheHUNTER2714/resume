@@ -35,6 +35,18 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
 
+        /* Animation */
+        @keyframes slideIn {
+          from {
+            transform: translateY(50%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
     /* Resume Section */
     .resume {
       display: flex;
@@ -278,10 +290,12 @@
       </div>
     </div>
 
-    <!-- Print Button -->
+    <!-- Print and Download PDF Buttons -->
     <button class="btn" onclick="window.print()">Print Resume</button>
+    <button class="btn" onclick="downloadPDF()">Download PDF</button>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     window.onload = function () {
       const resumeData = JSON.parse(localStorage.getItem('resumeData')) || {};
@@ -318,6 +332,24 @@
       if (resumeData.twitter) socialMediaDiv.innerHTML += `<a href="${resumeData.twitter}" target="_blank" alt="Twitter">Twitter</a>`;
       if (resumeData.github) socialMediaDiv.innerHTML += `<a href="${resumeData.github}" target="_blank" alt="GitHub">GitHub</a>`;
     };
+
+    // Function to download resume as PDF
+    function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+  
+      doc.text('Resume', 20, 20);
+      doc.text('Name: ' + document.getElementById('resume-name').textContent, 20, 30);
+      doc.text('Email: ' + document.getElementById('resume-email').textContent, 20, 40);
+      doc.text('Phone: ' + document.getElementById('resume-phone').textContent, 20, 50);
+      doc.text('Location: ' + document.getElementById('resume-location').textContent, 20, 60);
+      doc.text('About: ' + document.getElementById('resume-about').textContent, 20, 70);
+      doc.text('Experience: ' + document.getElementById('resume-experience').textContent, 20, 80);
+      doc.text('Education: ' + document.getElementById('resume-education').textContent, 20, 90);
+      doc.text('Projects: ' + document.getElementById('resume-projects').textContent, 20, 100);
+  
+      doc.save('resume.pdf');
+    }
   </script>
 </body>
 
