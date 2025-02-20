@@ -15,7 +15,7 @@
     }
 
     body {
-      background: url('https://www.bing.com/th/id/OGC.677c5559cc709cabbdb69dc9482f0c6e?pid=1.7&rurl=https%3a%2f%2fi.pinimg.com%2foriginals%2f88%2f6b%2f15%2f886b1598b09c5c588004570c4fd1e28c.gif&ehk=CJAowFvd%2bNvR4IAWd76w3lnta4%2bqYS79JOc%2fLenaryk%3d') no-repeat center center fixed;
+      background: url('https://via.placeholder.com/1200x800') no-repeat center center fixed;
       background-size: cover;
       color: #331515;
       padding: 40px 20px;
@@ -34,18 +34,6 @@
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
-
-        /* Animation */
-        @keyframes slideIn {
-          from {
-            transform: translateY(50%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
 
     /* Resume Section */
     .resume {
@@ -77,22 +65,6 @@
       font-size: 1.2em;
       margin-bottom: 10px;
       font-weight: 600;
-    }
-
-    .social-media a {
-      color: #f40d0d;
-      margin-right: 15px;
-      font-size: 1.2em;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .social-media a:hover {
-      color: #357ab8;
-    }
-
-    .social-media a:last-child {
-      margin-right: 0;
     }
 
     /* Right Panel Styling */
@@ -270,7 +242,7 @@
           </ul>
         </div>
         <div class="social-media" id="social-media">
-          <!-- Social Media Links -->
+          <!-- Social Media Links will be populated here -->
         </div>
       </div>
 
@@ -328,25 +300,41 @@
       // Social media links
       const socialMediaDiv = document.getElementById('social-media');
       socialMediaDiv.innerHTML = '';
-      if (resumeData.linkedin) socialMediaDiv.innerHTML += `<a href="${resumeData.linkedin}" target="_blank" alt="LinkedIn">LinkedIn</a>`;
-      if (resumeData.twitter) socialMediaDiv.innerHTML += `<a href="${resumeData.twitter}" target="_blank" alt="Twitter">Twitter</a>`;
-      if (resumeData.github) socialMediaDiv.innerHTML += `<a href="${resumeData.github}" target="_blank" alt="GitHub">GitHub</a>`;
+      if (resumeData.linkedin) socialMediaDiv.innerHTML += `<a href="${resumeData.linkedin}" target="_blank" alt="LinkedIn">LinkedIn</a><br>`;
+      if (resumeData.twitter) socialMediaDiv.innerHTML += `<a href="${resumeData.twitter}" target="_blank" alt="Twitter">Twitter</a><br>`;
+      if (resumeData.github) socialMediaDiv.innerHTML += `<a href="${resumeData.github}" target="_blank" alt="GitHub">GitHub</a><br>`;
+      if (!socialMediaDiv.innerHTML) socialMediaDiv.innerHTML = 'No social media links provided.';
     };
 
     // Function to download resume as PDF
     function downloadPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+
+      const backgroundColor = '#4a90e2'; // Light blue background color
+      doc.setFillColor(backgroundColor);
+      doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, 'F');
   
+      const imgElement = document.getElementById('resume-img');
+      const imgUrl = imgElement.src;
+
+      const imgWidth = 50;
+      const imgHeight = 50;
+      const imgX = 140;
+      const imgY = 20;
+
+      doc.addImage(imgUrl, 'JPEG', imgX, imgY, imgWidth, imgHeight);
+  
+      // Adding Text content to PDF
       doc.text('Resume', 20, 20);
-      doc.text('Name: ' + document.getElementById('resume-name').textContent, 20, 30);
-      doc.text('Email: ' + document.getElementById('resume-email').textContent, 20, 40);
-      doc.text('Phone: ' + document.getElementById('resume-phone').textContent, 20, 50);
-      doc.text('Location: ' + document.getElementById('resume-location').textContent, 20, 60);
-      doc.text('About: ' + document.getElementById('resume-about').textContent, 20, 70);
-      doc.text('Experience: ' + document.getElementById('resume-experience').textContent, 20, 80);
-      doc.text('Education: ' + document.getElementById('resume-education').textContent, 20, 90);
-      doc.text('Projects: ' + document.getElementById('resume-projects').textContent, 20, 100);
+      doc.text('Name: ' + document.getElementById('resume-name').textContent, 20, 40);
+      doc.text('Email: ' + document.getElementById('resume-email').textContent, 20, 50);
+      doc.text('Phone: ' + document.getElementById('resume-phone').textContent, 20, 60);
+      doc.text('Location: ' + document.getElementById('resume-location').textContent, 20, 70);
+      doc.text('About: ' + document.getElementById('resume-about').textContent, 20, 80);
+      doc.text('Experience: ' + document.getElementById('resume-experience').textContent, 20, 90);
+      doc.text('Education: ' + document.getElementById('resume-education').textContent, 20, 100);
+      doc.text('Projects: ' + document.getElementById('resume-projects').textContent, 20, 110);
   
       doc.save('resume.pdf');
     }
