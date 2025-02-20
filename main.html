@@ -134,49 +134,6 @@
       background-color: #357ab8;
     }
 
-    /* Animated Text Input */
-    input, textarea {
-      opacity: 0;
-      animation: slideIn 0.5s forwards;
-    }
-
-    input:nth-child(1), textarea:nth-child(1) {
-      animation-delay: 0.2s;
-    }
-    input:nth-child(2), textarea:nth-child(2) {
-      animation-delay: 0.4s;
-    }
-    input:nth-child(3), textarea:nth-child(3) {
-      animation-delay: 0.6s;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .container {
-        padding: 20px;
-      }
-
-      .form-container h2 {
-        font-size: 1.8em;
-      }
-
-      button {
-        padding: 12px;
-        font-size: 1em;
-      }
-    }
-
     /* Live Preview Section */
     .preview-container {
       margin-top: 30px;
@@ -196,6 +153,14 @@
     .preview-content {
       font-size: 1.2em;
       color: #333;
+    }
+
+    /* Profile Image Preview */
+    .preview-content img {
+      max-width: 150px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 20px;
     }
 
   </style>
@@ -302,8 +267,24 @@
         <p><strong>Education:</strong> ${education}</p>
         <p><strong>Projects:</strong> ${projects}</p>
       `;
-      
-      document.getElementById('resumePreview').innerHTML = previewContent;
+
+      // Display profile image if available
+      const fileInput = document.getElementById('image');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewContent = `
+            <img src="${e.target.result}" alt="Profile Image">
+            ${previewContent}
+          `;
+          document.getElementById('resumePreview').innerHTML = previewContent;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        document.getElementById('resumePreview').innerHTML = previewContent;
+      }
+
       document.getElementById('previewSection').style.display = 'block';
     }
 
