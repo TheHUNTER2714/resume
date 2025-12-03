@@ -59,3 +59,4 @@ Feel free to use this code for learning or academic projects. If you reuse it el
 This repo is a foundation — a skeleton student/resume management portal built in HTML. It’s lightweight, easy to understand, and ready to be extended. If you plan to build a full system (with backend, data storage, user roles), this is a great starting point.  
 
 Happy coding!  
+Project Link - https://thehunter2714.github.io/resume/ 
